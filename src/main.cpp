@@ -40,7 +40,6 @@ int main(int argc, char *argv[])
 						{
 							case SDL_WINDOWEVENT_RESIZED:
 								__setWindowSize(event.window.data1, event.window.data2);
-								cam.updateOnWindowSizeChanges();
 								break;
 
 							default:

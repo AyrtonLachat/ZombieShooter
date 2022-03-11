@@ -12,24 +12,24 @@
 class Camera
 {
 	public:
-		Camera(SDL_FPoint position = {0, 0}, SDL_FPoint size = {(float)WINDOW_WIDTH, (float)WINDOW_HEIGHT});
+		Camera(SDL_FPoint position = {0, 0}, SDL_FPoint size = {FWINDOW_WIDTH, FWINDOW_HEIGHT}, float zoom = 1.0f);
 
 		void setPosition(SDL_FPoint position);
 		void setRatio(float ratio);
 		void setSize(SDL_FPoint size);
+		void setZoom(float zoom);
 
 		void move(SDL_FPoint delta);
-
-		void updateOnWindowSizeChanges();
 
 		SDL_FPoint getPosition() const noexcept;
 		float getRatio() const noexcept;
 		SDL_FPoint getSize() const noexcept;
 		SDL_FRect getDrawingRect() const noexcept;
+		float getZoom() const noexcept;
 
 	private:
-		SDL_FPoint _position;
-		float _ratio, _height;
+		SDL_FPoint _position, _size;
+		float _zoom;
 };
 
 #endif

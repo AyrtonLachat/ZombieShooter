@@ -1,14 +1,16 @@
 #include "camera.hpp"
 
+#include <iostream>
+
 /*************************************************
 * \author Ayrton Lachat
 * \file camera.cpp
 * \date 10.03.22 at 20:49
 *************************************************/
 
-Camera::Camera(SDL_FPoint position, SDL_FPoint size) : _position {position}, _ratio {size.x / size.y}, _height {size.y}
+Camera::Camera(SDL_FPoint position, SDL_FPoint size, float zoom) : _position {position}, _size {size}, _zoom {zoom}
 {
-
+	
 }
 
 
@@ -22,15 +24,22 @@ void Camera::setPosition(SDL_FPoint position)
 
 void Camera::setRatio(float ratio)
 {
-	_ratio = ratio;
+	// TO DEV
 }
 
 
 
 void Camera::setSize(SDL_FPoint size)
 {
-	_height = size.y;
-	_ratio = size.x / _height;
+	_size = size;
+}
+
+
+
+void Camera::setZoom(float zoom)
+{
+	_zoom = zoom;
+	
 }
 
 
@@ -38,25 +47,6 @@ void Camera::setSize(SDL_FPoint size)
 void Camera::move(SDL_FPoint delta)
 {
 	_position = _position + delta;
-}
-
-
-
-void Camera::updateOnWindowSizeChanges()
-{
-	if (FWINDOW_WIDTH > _ratio * FWINDOW_HEIGHT)
-	{
-		// width is too small
-
-		_height = FWINDOW_HEIGHT;
-	}
-
-	else
-	{
-		// height is too small
-
-		_height = FWINDOW_WIDTH / _ratio;
-	}
 }
 
 
@@ -70,14 +60,14 @@ SDL_FPoint Camera::getPosition() const noexcept
 
 float Camera::getRatio() const noexcept
 {
-	return _ratio;
+	return _size.x / _size.y;
 }
 
 
 
 SDL_FPoint Camera::getSize() const noexcept
 {
-	return {_ratio * _height, _height};
+	return _size;
 }
 
 
@@ -85,9 +75,19 @@ SDL_FPoint Camera::getSize() const noexcept
 SDL_FRect Camera::getDrawingRect() const noexcept
 {
 	return {
-		(FWINDOW_WIDTH - this->getSize().x) / 2.0f,
-		(FWINDOW_HEIGHT - _height) / 2.0f,
-		this->getSize().x,
-		_height
+		_position.x - _size.x / 2,
+		_position.y - _size.y / 2,
+		_size.x,
+		_size.y
 	};
 }
+
+
+
+float Camera::getZoom() const noexcept
+{
+	return _zoom;
+}
+
+
+
