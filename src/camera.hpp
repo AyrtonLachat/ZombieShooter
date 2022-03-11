@@ -21,6 +21,8 @@ class Camera
 
 		void move(SDL_FPoint delta);
 
+		void updateOnWindowSizeChange();
+
 		SDL_FPoint getPosition() const noexcept;
 		float getRatio() const noexcept;
 		SDL_FPoint getSize() const noexcept;
@@ -28,7 +30,7 @@ class Camera
 		float getZoom() const noexcept;
 
 	private:
-		SDL_FPoint _position, _size;
+		SDL_FPoint _position, _size, _internalZoom;
 		float _zoom;
 };
 
