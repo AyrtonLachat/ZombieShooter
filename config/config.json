@@ -1,0 +1,11 @@
+{
+	"spritesheetAmount" : 1,
+	"spritesheets" : [
+		{
+			"name" : "foundation",
+			"src" : "foundation.png",
+			"sprite_size" : 8,
+			"collision_map" : [false, true, true, true, true, true, true, false, false]
+		}
+	]
+}

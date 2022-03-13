@@ -17,9 +17,14 @@ class Camera
 		void setPosition(SDL_FPoint position);
 		void setRatio(float ratio);
 		void setSize(SDL_FPoint size);
+		/**
+		 * \warning If you set zoom smaller than 1.0f, it will stay at 1.0f !
+		 */
 		void setZoom(float zoom);
 
 		void move(SDL_FPoint delta);
+
+		void drawImage(SDL_Texture *texture, SDL_FRect rect, const SDL_Rect *innerRect);
 
 		void updateOnWindowSizeChange();
 
@@ -33,5 +38,7 @@ class Camera
 		SDL_FPoint _position, _size, _internalZoom;
 		float _zoom;
 };
+
+extern Camera *camera;
 
 #endif

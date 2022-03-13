@@ -27,9 +27,9 @@ int main(int argc, char *argv[])
 		bool running {true};
 		SDL_Event event {};
 		int /*dt {0}, */framerate {60};
-		Camera cam {};
+		camera = new Camera();
 
-
+		
 
 		while (running)
 		{
@@ -39,9 +39,9 @@ int main(int argc, char *argv[])
 				{
 					case SDL_KEYDOWN:
 						if (event.key.keysym.scancode == SDL_SCANCODE_A)
-							cam.setZoom(cam.getZoom() + 0.1f);
+							camera->setZoom(camera->getZoom() + 0.1f);
 						else if (event.key.keysym.scancode == SDL_SCANCODE_D)
-							cam.setZoom(cam.getZoom() - 0.1f);
+							camera->setZoom(camera->getZoom() - 0.1f);
 						break;
 
 					case SDL_WINDOWEVENT:
@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
 							case SDL_WINDOWEVENT_RESIZED:
 								__setWindowSize(event.window.data1, event.window.data2);
 
-								cam.updateOnWindowSizeChange();
+								camera->updateOnWindowSizeChange();
 								break;
 
 							default:
@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
 			SDL_RenderClear(renderer);
 
 			SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-			SDL_FRect tmp {cam.getDrawingRect()};
+			SDL_FRect tmp {camera->getDrawingRect()};
 			SDL_RenderDrawRectF(renderer, &tmp);
 
 			SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);

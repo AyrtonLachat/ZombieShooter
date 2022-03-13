@@ -8,6 +8,8 @@
 #define FWINDOW_WIDTH ((float)__getWindowWidth())
 #define FWINDOW_HEIGHT ((float)__getWindowHeight())
 
+#define LOG std::clog
+
 /*************************************************
 * \author Ayrton Lachat
 * \file global.hpp
@@ -22,6 +24,8 @@ int __getWindowWidth();
 int __getWindowHeight();
 
 int capFPS(int framerate);
+
+SDL_Surface *createNoTextureSurface(int size);
 
 
 #ifdef __ENABLE_WINDOW_SIZE_SETTING
